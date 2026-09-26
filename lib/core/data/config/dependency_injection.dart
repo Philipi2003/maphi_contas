@@ -2,8 +2,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:dotenv/dotenv.dart';
-
 part 'dependency_injection.g.dart';
 
 @riverpod
