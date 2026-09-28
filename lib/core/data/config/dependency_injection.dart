@@ -1,6 +1,9 @@
-import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:maphi_contas/auth/data/repositories/auth_repository_implementation.dart';
+import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.dart';
+import 'package:maphi_contas/auth/domain/usecases/initialize_google_sign_in_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+export 'package:maphi_contas/auth/data/services/google_sign_in.dart';
 
 part 'dependency_injection.g.dart';
 
@@ -10,10 +13,11 @@ String helloWorld(Ref ref) {
 }
 
 @riverpod
-GoogleSignIn googleSignIn(Ref ref) {
-  // final env = DotEnv(includePlatformEnvironment: true)..load();
+AuthRepositoryInterface authRepository(Ref ref) {
+  return AuthRepositoryImplementation();
+}
 
-  final GoogleSignIn signIn = GoogleSignIn.instance;
-
-  return signIn;
+@riverpod
+InitializeGoogleSignInUsecase initializeGoogleSignIn(Ref ref) {
+  return InitializeGoogleSignInUsecase();
 }

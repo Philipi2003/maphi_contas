@@ -9,7 +9,7 @@ import 'dart:async' as _i3;
 import 'package:fpdart/fpdart.dart' as _i4;
 import 'package:maphi_contas/auth/domain/entities/google_auth_state.dart'
     as _i6;
-import 'package:maphi_contas/auth/domain/usecases/initialize_google_sign_in_usecase.dart'
+import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.dart'
     as _i2;
 import 'package:maphi_contas/core/domain/failures/app_failure.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -30,18 +30,18 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 // ignore_for_file: invalid_use_of_internal_member
 
-/// A class which mocks [InitializeGoogleSignInUsecase].
+/// A class which mocks [AuthRepositoryInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockInitializeGoogleSignInUsecase extends _i1.Mock
-    implements _i2.InitializeGoogleSignInUsecase {
+class MockAuthRepositoryInterface extends _i1.Mock
+    implements _i2.AuthRepositoryInterface {
   @override
-  _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>> call() =>
-      (super.noSuchMethod(
-        Invocation.method(#call, []),
-        returnValue:
-            _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.empty(),
-        returnValueForMissingStub:
-            _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.empty(),
-      ) as _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>);
+  _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>
+  initializeGoogleSignIn() => (super.noSuchMethod(
+    Invocation.method(#initializeGoogleSignIn, []),
+    returnValue:
+        _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.empty(),
+    returnValueForMissingStub:
+        _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.empty(),
+  ) as _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>);
 }
