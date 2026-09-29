@@ -1,3 +1,4 @@
+import 'package:dotenv/dotenv.dart';
 import 'package:maphi_contas/auth/data/repositories/auth_repository_implementation.dart';
 import 'package:maphi_contas/auth/data/services/google_sign_in_service_adapter.dart';
 import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.dart';
@@ -24,10 +25,17 @@ AuthRepositoryInterface authRepository(Ref ref){
 
 @riverpod
 GoogleSignInServiceAdapter googleSignInServiceAdapter(Ref ref){
-  return GoogleSignInServiceAdapter(googleSignInInstance: ref.read(googleSignInInstanceProvider));
+  return GoogleSignInServiceAdapter(googleSignInInstance: ref.read(googleSignInInstanceProvider), env: ref.read(dotEnvProvider));
 }
 
 @riverpod
 GoogleSignIn googleSignInInstance(Ref ref){
   return GoogleSignIn.instance;
+}
+
+@riverpod
+DotEnv dotEnv(Ref ref) {
+  return DotEnv(includePlatformEnvironment: true)..load([
+    '../../../../.env'
+  ]);
 }

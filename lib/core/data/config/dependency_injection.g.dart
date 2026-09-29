@@ -195,7 +195,7 @@ final class GoogleSignInServiceAdapterProvider
 }
 
 String _$googleSignInServiceAdapterHash() =>
-    r'64859cbeac02b8644db735b047f8fe5d45c3516b';
+    r'4b98cdd6d100a11c083a8ad1f44a2e728d20335f';
 
 @ProviderFor(googleSignInInstance)
 final googleSignInInstanceProvider = GoogleSignInInstanceProvider._();
@@ -238,3 +238,43 @@ final class GoogleSignInInstanceProvider
 
 String _$googleSignInInstanceHash() =>
     r'68eedc379809c4798d0cf0406348c8e8b409d65f';
+
+@ProviderFor(dotEnv)
+final dotEnvProvider = DotEnvProvider._();
+
+final class DotEnvProvider extends $FunctionalProvider<DotEnv, DotEnv, DotEnv>
+    with $Provider<DotEnv> {
+  DotEnvProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dotEnvProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$dotEnvHash();
+
+  @$internal
+  @override
+  $ProviderElement<DotEnv> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  DotEnv create(Ref ref) {
+    return dotEnv(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DotEnv value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DotEnv>(value),
+    );
+  }
+}
+
+String _$dotEnvHash() => r'83972fe1f5a556ddfdf85a980721a9cbbb6acb61';
