@@ -50,6 +50,57 @@ final class HelloWorldProvider
 
 String _$helloWorldHash() => r'b7550791faf7884e172d213f6c03f55d7302458d';
 
+@ProviderFor(initializeGoogleSignInUseCase)
+final initializeGoogleSignInUseCaseProvider =
+    InitializeGoogleSignInUseCaseProvider._();
+
+final class InitializeGoogleSignInUseCaseProvider
+    extends
+        $FunctionalProvider<
+          InitializeGoogleSignInUsecase,
+          InitializeGoogleSignInUsecase,
+          InitializeGoogleSignInUsecase
+        >
+    with $Provider<InitializeGoogleSignInUsecase> {
+  InitializeGoogleSignInUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'initializeGoogleSignInUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$initializeGoogleSignInUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<InitializeGoogleSignInUsecase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  InitializeGoogleSignInUsecase create(Ref ref) {
+    return initializeGoogleSignInUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(InitializeGoogleSignInUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<InitializeGoogleSignInUsecase>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$initializeGoogleSignInUseCaseHash() =>
+    r'0c1988aff48ec8273eeba6d631e9de1fdae2c764';
+
 @ProviderFor(authRepository)
 final authRepositoryProvider = AuthRepositoryProvider._();
 
@@ -95,54 +146,46 @@ final class AuthRepositoryProvider
   }
 }
 
-String _$authRepositoryHash() => r'12b5f3afd7ec3af11ea54633f10e71741fed9523';
+String _$authRepositoryHash() => r'85003acfe4ae2f12696cfe24a3eb7ba510c180cf';
 
-@ProviderFor(initializeGoogleSignIn)
-final initializeGoogleSignInProvider = InitializeGoogleSignInProvider._();
+@ProviderFor(googleSignInInstance)
+final googleSignInInstanceProvider = GoogleSignInInstanceProvider._();
 
-final class InitializeGoogleSignInProvider
-    extends
-        $FunctionalProvider<
-          InitializeGoogleSignInUsecase,
-          InitializeGoogleSignInUsecase,
-          InitializeGoogleSignInUsecase
-        >
-    with $Provider<InitializeGoogleSignInUsecase> {
-  InitializeGoogleSignInProvider._()
+final class GoogleSignInInstanceProvider
+    extends $FunctionalProvider<GoogleSignIn, GoogleSignIn, GoogleSignIn>
+    with $Provider<GoogleSignIn> {
+  GoogleSignInInstanceProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'initializeGoogleSignInProvider',
+        name: r'googleSignInInstanceProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$initializeGoogleSignInHash();
+  String debugGetCreateSourceHash() => _$googleSignInInstanceHash();
 
   @$internal
   @override
-  $ProviderElement<InitializeGoogleSignInUsecase> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
+  $ProviderElement<GoogleSignIn> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
-  InitializeGoogleSignInUsecase create(Ref ref) {
-    return initializeGoogleSignIn(ref);
+  GoogleSignIn create(Ref ref) {
+    return googleSignInInstance(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(InitializeGoogleSignInUsecase value) {
+  Override overrideWithValue(GoogleSignIn value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<InitializeGoogleSignInUsecase>(
-        value,
-      ),
+      providerOverride: $SyncValueProvider<GoogleSignIn>(value),
     );
   }
 }
 
-String _$initializeGoogleSignInHash() =>
-    r'3097ffb1f154959e1b5010f3f8afaa95fc2f8b24';
+String _$googleSignInInstanceHash() =>
+    r'68eedc379809c4798d0cf0406348c8e8b409d65f';
