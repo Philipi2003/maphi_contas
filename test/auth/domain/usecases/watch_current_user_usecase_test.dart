@@ -9,13 +9,13 @@ import 'package:mockito/annotations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 @GenerateNiceMocks([MockSpec<AuthRepositoryInterface>()])
-import 'initialize_google_sign_in_usecase_test.mocks.dart';
+import 'watch_current_user_usecase_test.mocks.dart';
 
 void main() {
   test("Retorna um GoogleAuthState, quando a operação dá certo", () async {
     final repository = MockAuthRepositoryInterface();
 
-    when(repository.initializeGoogleSignIn()).thenAnswer(
+    when(repository.initializeService()).thenAnswer(
       (_) => Stream.value(
         Either<AppFailure, GoogleAuthState>.of(
           GoogleAuthState(currentUser: null),
@@ -28,7 +28,7 @@ void main() {
     );
 
     Stream<Either<AppFailure, GoogleAuthState>> authState = container
-        .read(initializeGoogleSignInUseCaseProvider)
+        .read(initializeGoogleAuthServiceUsecaseProvider)
         .call();
 
     await for (final value in authState) {
@@ -38,9 +38,11 @@ void main() {
   test("Retorna um AppFailure, quando a operação dá errado", () async {
     final repository = MockAuthRepositoryInterface();
 
-    when(repository.initializeGoogleSignIn()).thenAnswer(
+    when(repository.initializeService()).thenAnswer(
       (_) => Stream.value(
-        Either<AppFailure, GoogleAuthState>.left(AppFailure(message: "Erro genérico",statusCode: "007"))
+        Either<AppFailure, GoogleAuthState>.left(
+          AppFailure(message: "Erro genérico", statusCode: "007"),
+        ),
       ),
     );
 
@@ -49,7 +51,7 @@ void main() {
     );
 
     Stream<Either<AppFailure, GoogleAuthState>> authState = container
-        .read(initializeGoogleSignInUseCaseProvider)
+        .read(initializeGoogleAuthServiceUsecaseProvider)
         .call();
 
     await for (final value in authState) {

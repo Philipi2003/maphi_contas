@@ -1,10 +1,14 @@
 import 'package:dotenv/dotenv.dart';
-import 'package:maphi_contas/auth/data/repositories/auth_repository_implementation.dart';
+import 'package:googleapis/dataform/v1.dart';
+import 'package:maphi_contas/auth/data/repositories/auth_repository_impl.dart';
 import 'package:maphi_contas/auth/data/services/google_sign_in_service_adapter.dart';
 import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.dart';
-import 'package:maphi_contas/auth/domain/usecases/initialize_google_sign_in_usecase.dart';
+import 'package:maphi_contas/auth/domain/usecases/initialize_google_auth_service_usecase.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:maphi_contas/core/domain/failures/app_failure.dart';
+import 'package:maphi_contas/auth/domain/entities/google_auth_state.dart';
 
 part 'dependency_injection.g.dart';
 
@@ -13,29 +17,41 @@ String helloWorld(Ref ref) {
   return "Hello World, Riverpod";
 }
 
-@riverpod
-InitializeGoogleSignInUsecase initializeGoogleSignInUseCase(Ref ref) {
-  return InitializeGoogleSignInUsecase(repository: ref.read(authRepositoryProvider));
+@Riverpod(keepAlive: true)
+Stream<Either<AppFailure, GoogleAuthState>> currentAuthState(Ref ref) async* {
+  final usecase = ref.read(initializeGoogleAuthServiceUsecaseProvider);
+
+  yield* usecase.call();
 }
 
 @riverpod
-AuthRepositoryInterface authRepository(Ref ref){
-  return GoogleAuthRepositoryImplementation();
+InitializeGoogleAuthServiceUsecase initializeGoogleAuthServiceUsecase(Ref ref) {
+  final repository = ref.read(authRepositoryProvider);
+
+  return InitializeGoogleAuthServiceUsecase(authRepository: repository);
 }
 
 @riverpod
-GoogleSignInServiceAdapter googleSignInServiceAdapter(Ref ref){
-  return GoogleSignInServiceAdapter(googleSignInInstance: ref.read(googleSignInInstanceProvider), env: ref.read(dotEnvProvider));
+AuthRepositoryInterface authRepository(Ref ref) {
+  return GoogleAuthRepositoryImpl(
+    signInService: ref.read(signInServiceProvider),
+  );
 }
 
 @riverpod
-GoogleSignIn googleSignInInstance(Ref ref){
+SignInService signInService(Ref ref) {
+  return SignInService(
+    googleSignInInstance: ref.read(googleSignInInstanceProvider),
+    env: ref.read(dotEnvProvider),
+  );
+}
+
+@riverpod
+GoogleSignIn googleSignInInstance(Ref ref) {
   return GoogleSignIn.instance;
 }
 
 @riverpod
 DotEnv dotEnv(Ref ref) {
-  return DotEnv(includePlatformEnvironment: true)..load([
-    '../../../../.env'
-  ]);
+  return DotEnv(includePlatformEnvironment: true)..load(['../../../../.env']);
 }

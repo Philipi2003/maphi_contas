@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Color(0xFF7aa029))),
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Color(0xFF7AA029))),
       routerConfig: AppRouter.router,
     );
   }

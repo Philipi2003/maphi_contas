@@ -50,56 +50,98 @@ final class HelloWorldProvider
 
 String _$helloWorldHash() => r'b7550791faf7884e172d213f6c03f55d7302458d';
 
-@ProviderFor(initializeGoogleSignInUseCase)
-final initializeGoogleSignInUseCaseProvider =
-    InitializeGoogleSignInUseCaseProvider._();
+@ProviderFor(currentAuthState)
+final currentAuthStateProvider = CurrentAuthStateProvider._();
 
-final class InitializeGoogleSignInUseCaseProvider
+final class CurrentAuthStateProvider
     extends
         $FunctionalProvider<
-          InitializeGoogleSignInUsecase,
-          InitializeGoogleSignInUsecase,
-          InitializeGoogleSignInUsecase
+          AsyncValue<Either<AppFailure, GoogleAuthState>>,
+          Either<AppFailure, GoogleAuthState>,
+          Stream<Either<AppFailure, GoogleAuthState>>
         >
-    with $Provider<InitializeGoogleSignInUsecase> {
-  InitializeGoogleSignInUseCaseProvider._()
+    with
+        $FutureModifier<Either<AppFailure, GoogleAuthState>>,
+        $StreamProvider<Either<AppFailure, GoogleAuthState>> {
+  CurrentAuthStateProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'initializeGoogleSignInUseCaseProvider',
+        name: r'currentAuthStateProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentAuthStateHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<Either<AppFailure, GoogleAuthState>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<Either<AppFailure, GoogleAuthState>> create(Ref ref) {
+    return currentAuthState(ref);
+  }
+}
+
+String _$currentAuthStateHash() => r'7638f56354cc2423244e20333f7ec9d5e37241e1';
+
+@ProviderFor(initializeGoogleAuthServiceUsecase)
+final initializeGoogleAuthServiceUsecaseProvider =
+    InitializeGoogleAuthServiceUsecaseProvider._();
+
+final class InitializeGoogleAuthServiceUsecaseProvider
+    extends
+        $FunctionalProvider<
+          InitializeGoogleAuthServiceUsecase,
+          InitializeGoogleAuthServiceUsecase,
+          InitializeGoogleAuthServiceUsecase
+        >
+    with $Provider<InitializeGoogleAuthServiceUsecase> {
+  InitializeGoogleAuthServiceUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'initializeGoogleAuthServiceUsecaseProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$initializeGoogleSignInUseCaseHash();
+  String debugGetCreateSourceHash() =>
+      _$initializeGoogleAuthServiceUsecaseHash();
 
   @$internal
   @override
-  $ProviderElement<InitializeGoogleSignInUsecase> $createElement(
+  $ProviderElement<InitializeGoogleAuthServiceUsecase> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  InitializeGoogleSignInUsecase create(Ref ref) {
-    return initializeGoogleSignInUseCase(ref);
+  InitializeGoogleAuthServiceUsecase create(Ref ref) {
+    return initializeGoogleAuthServiceUsecase(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(InitializeGoogleSignInUsecase value) {
+  Override overrideWithValue(InitializeGoogleAuthServiceUsecase value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<InitializeGoogleSignInUsecase>(
+      providerOverride: $SyncValueProvider<InitializeGoogleAuthServiceUsecase>(
         value,
       ),
     );
   }
 }
 
-String _$initializeGoogleSignInUseCaseHash() =>
-    r'0c1988aff48ec8273eeba6d631e9de1fdae2c764';
+String _$initializeGoogleAuthServiceUsecaseHash() =>
+    r'2ce88cdd7067ac47415a6f3f2b26e27ff5d39b6e';
 
 @ProviderFor(authRepository)
 final authRepositoryProvider = AuthRepositoryProvider._();
@@ -146,56 +188,48 @@ final class AuthRepositoryProvider
   }
 }
 
-String _$authRepositoryHash() => r'53ca17527ea7aeb71f0a7bc023a08917a5701b81';
+String _$authRepositoryHash() => r'e4fec15bf942b33c1c5f1b8fce58500a88771f52';
 
-@ProviderFor(googleSignInServiceAdapter)
-final googleSignInServiceAdapterProvider =
-    GoogleSignInServiceAdapterProvider._();
+@ProviderFor(signInService)
+final signInServiceProvider = SignInServiceProvider._();
 
-final class GoogleSignInServiceAdapterProvider
-    extends
-        $FunctionalProvider<
-          GoogleSignInServiceAdapter,
-          GoogleSignInServiceAdapter,
-          GoogleSignInServiceAdapter
-        >
-    with $Provider<GoogleSignInServiceAdapter> {
-  GoogleSignInServiceAdapterProvider._()
+final class SignInServiceProvider
+    extends $FunctionalProvider<SignInService, SignInService, SignInService>
+    with $Provider<SignInService> {
+  SignInServiceProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'googleSignInServiceAdapterProvider',
+        name: r'signInServiceProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$googleSignInServiceAdapterHash();
+  String debugGetCreateSourceHash() => _$signInServiceHash();
 
   @$internal
   @override
-  $ProviderElement<GoogleSignInServiceAdapter> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
+  $ProviderElement<SignInService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
-  GoogleSignInServiceAdapter create(Ref ref) {
-    return googleSignInServiceAdapter(ref);
+  SignInService create(Ref ref) {
+    return signInService(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(GoogleSignInServiceAdapter value) {
+  Override overrideWithValue(SignInService value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<GoogleSignInServiceAdapter>(value),
+      providerOverride: $SyncValueProvider<SignInService>(value),
     );
   }
 }
 
-String _$googleSignInServiceAdapterHash() =>
-    r'4b98cdd6d100a11c083a8ad1f44a2e728d20335f';
+String _$signInServiceHash() => r'66aeb68c37c579c3cabc572d5804a79455284579';
 
 @ProviderFor(googleSignInInstance)
 final googleSignInInstanceProvider = GoogleSignInInstanceProvider._();
