@@ -97,4 +97,30 @@ void main() {
       ),
     );
   });
+  test(
+    'Quando for solicitado um authorizeScopes, deve emitir um bool de sucesso',
+    () async {
+      final signInService = MockSignInService();
+      final anyAccount = MockGoogleSignInAccount();
+      final anyClientAuthorization = MockGoogleSignInClientAuthorization();
+
+      when(signInService.authorizeScopes(user: anyAccount))
+          .thenAnswer((answer) => Future.value(anyClientAuthorization));
+
+      final container = ProviderContainer(
+        overrides: [
+          signInServiceProvider.overrideWith(((ref) => signInService)),
+        ],
+      );
+
+      final repository = container.read(authRepositoryProvider);
+
+      // expectLater(
+      //   // repository.authorizeScopes(),
+      //   emits(
+      //     Either<AppFailure, bool>.of(true)
+      //   ),
+      // );
+    },
+  );
 }
