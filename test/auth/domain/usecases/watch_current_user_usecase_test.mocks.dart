@@ -13,6 +13,7 @@ import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.
     as _i2;
 import 'package:maphi_contas/core/domain/failures/app_failure.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -44,4 +45,25 @@ class MockAuthRepositoryInterface extends _i1.Mock
     returnValueForMissingStub:
         _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.empty(),
   ) as _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>);
+
+  @override
+  _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>> authorizeScopes(
+    _i6.GoogleAuthState? authState,
+  ) => (super.noSuchMethod(
+    Invocation.method(#authorizeScopes, [authState]),
+    returnValue:
+        _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.value(
+          _i7.dummyValue<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>(
+            this,
+            Invocation.method(#authorizeScopes, [authState]),
+          ),
+        ),
+    returnValueForMissingStub:
+        _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.value(
+          _i7.dummyValue<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>(
+            this,
+            Invocation.method(#authorizeScopes, [authState]),
+          ),
+        ),
+  ) as _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>);
 }

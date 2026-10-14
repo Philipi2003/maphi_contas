@@ -4,4 +4,7 @@ import 'package:maphi_contas/core/domain/failures/app_failure.dart';
 
 abstract class AuthRepositoryInterface {
   Stream<Either<AppFailure, GoogleAuthState>> initializeService();
+  Future<Either<AppFailure, GoogleAuthState>> authorizeScopes(
+    GoogleAuthState authState,
+  );
 }
