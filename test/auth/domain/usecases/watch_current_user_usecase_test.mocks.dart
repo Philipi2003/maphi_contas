@@ -47,23 +47,45 @@ class MockAuthRepositoryInterface extends _i1.Mock
   ) as _i3.Stream<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>);
 
   @override
-  _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>> authorizeScopes(
-    _i6.GoogleAuthState? authState,
-  ) => (super.noSuchMethod(
-    Invocation.method(#authorizeScopes, [authState]),
-    returnValue:
-        _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.value(
-          _i7.dummyValue<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>(
-            this,
-            Invocation.method(#authorizeScopes, [authState]),
-          ),
-        ),
+  _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>
+  requestAuthorization({required _i6.GoogleAuthState? authState}) =>
+      (super.noSuchMethod(
+        Invocation.method(#requestAuthorization, [], {#authState: authState}),
+        returnValue:
+            _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.value(
+              _i7.dummyValue<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>(
+                this,
+                Invocation.method(#requestAuthorization, [], {
+                  #authState: authState,
+                }),
+              ),
+            ),
+        returnValueForMissingStub:
+            _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.value(
+              _i7.dummyValue<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>(
+                this,
+                Invocation.method(#requestAuthorization, [], {
+                  #authState: authState,
+                }),
+              ),
+            ),
+      ) as _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>);
+
+  @override
+  _i3.Future<_i4.Either<_i5.AppFailure, void>> signOut() => (super.noSuchMethod(
+    Invocation.method(#signOut, []),
+    returnValue: _i3.Future<_i4.Either<_i5.AppFailure, void>>.value(
+      _i7.dummyValue<_i4.Either<_i5.AppFailure, void>>(
+        this,
+        Invocation.method(#signOut, []),
+      ),
+    ),
     returnValueForMissingStub:
-        _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>.value(
-          _i7.dummyValue<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>(
+        _i3.Future<_i4.Either<_i5.AppFailure, void>>.value(
+          _i7.dummyValue<_i4.Either<_i5.AppFailure, void>>(
             this,
-            Invocation.method(#authorizeScopes, [authState]),
+            Invocation.method(#signOut, []),
           ),
         ),
-  ) as _i3.Future<_i4.Either<_i5.AppFailure, _i6.GoogleAuthState>>);
+  ) as _i3.Future<_i4.Either<_i5.AppFailure, void>>);
 }

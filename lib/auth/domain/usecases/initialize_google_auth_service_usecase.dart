@@ -4,11 +4,11 @@ import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.
 import 'package:maphi_contas/core/domain/failures/app_failure.dart';
 
 class InitializeGoogleAuthServiceUsecase {
-  InitializeGoogleAuthServiceUsecase({required this.authRepository});
+  InitializeGoogleAuthServiceUsecase({required this._authRepository});
 
-  final AuthRepositoryInterface authRepository;
+  final AuthRepositoryInterface _authRepository;
 
   Stream<Either<AppFailure, GoogleAuthState>> call() async* {
-    yield* authRepository.initializeService();
+    yield* _authRepository.initializeService();
   }
 }

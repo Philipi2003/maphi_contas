@@ -8,24 +8,27 @@ import 'package:maphi_contas/core/data/config/dependency_injection.dart';
 import 'package:maphi_contas/core/domain/failures/app_failure.dart';
 
 class GoogleAuthRepositoryImpl implements AuthRepositoryInterface {
-  GoogleAuthRepositoryImpl({required this.signInService});
+  GoogleAuthRepositoryImpl({required this._signInService});
 
-  final SignInService signInService;
+  final SignInService _signInService;
 
   @override
   Stream<Either<AppFailure, GoogleAuthState>> initializeService() async* {
     // TODO: implement initializeGoogleSignIn
     try {
-      await signInService.initialize();
-      signInService.attemptLogin();
+      await _signInService.initialize();
+      _signInService.attemptLogin();
       yield* _processAuthenticationEvent(
-        signInService.watchAuthenticationEventsStream(),
+        _signInService.watchAuthenticationEventsStream(),
       );
     } on GoogleSignInException catch (e) {
       yield _handleExceptionReturnGoogleSignInException(e);
     } on Exception catch (e) {
       yield Either<AppFailure, GoogleAuthState>.left(
-        AppFailure(statusCode: '500', message: e.toString()),
+        AppFailure(
+          statusCode: '500',
+          message: e.toString().replaceFirst("Exception: ", ""),
+        ),
       );
     }
   }
@@ -45,8 +48,8 @@ class GoogleAuthRepositoryImpl implements AuthRepositoryInterface {
         );
       }
 
-      final GoogleSignInClientAuthorization? authorization = await signInService
-          .authorizationForScopes(user: user);
+      final GoogleSignInClientAuthorization? authorization =
+          await _signInService.authorizationForScopes(user: user);
 
       return Either<AppFailure, GoogleAuthState>.of(
         GoogleAuthState(currentUser: user, isAuthorized: authorization != null),
@@ -74,18 +77,37 @@ class GoogleAuthRepositoryImpl implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Either<AppFailure, GoogleAuthState>> authorizeScopes(
-    GoogleAuthState authState,
-  ) async {
+  Future<Either<AppFailure, GoogleAuthState>> requestAuthorization({
+    required GoogleAuthState authState,
+  }) async {
     try {
-      final GoogleSignInClientAuthorization authorization = await signInService
-          .authorizeScopes(user: authState.currentUser!);
+      final GoogleSignInClientAuthorization authorization = await _signInService
+          .requestAuthorization(user: authState.currentUser!);
       return Either<AppFailure, GoogleAuthState>.of(
         GoogleAuthState(currentUser: authState.currentUser, isAuthorized: true),
       );
     } on Exception catch (e) {
       return Either<AppFailure, GoogleAuthState>.left(
-        AppFailure(statusCode: '500', message: e.toString()),
+        AppFailure(
+          statusCode: '500',
+          message: e.toString().replaceFirst("Exception: ", ""),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<AppFailure, void>> signOut() async {
+    // TODO: implement signOut
+    try {
+      await _signInService.signOut();
+      return Either<AppFailure, void>.of(null);
+    } on Exception catch (e) {
+      return Either<AppFailure, void>.left(
+        AppFailure(
+          statusCode: "500",
+          message: e.toString().replaceAll("Exception: ", ""),
+        ),
       );
     }
   }

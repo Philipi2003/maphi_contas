@@ -4,13 +4,12 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
-import 'package:dotenv/dotenv.dart' as _i3;
 import 'package:google_sign_in/google_sign_in.dart' as _i2;
-import 'package:maphi_contas/auth/data/services/sign_in_service.dart' as _i4;
+import 'package:maphi_contas/auth/data/services/sign_in_service.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -28,33 +27,23 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: subtype_of_sealed_class
 // ignore_for_file: invalid_use_of_internal_member
 
-class _FakeGoogleSignIn_0 extends _i1.SmartFake implements _i2.GoogleSignIn {
-  _FakeGoogleSignIn_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeDotEnv_1 extends _i1.SmartFake implements _i3.DotEnv {
-  _FakeDotEnv_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeGoogleSignInClientAuthorization_2 extends _i1.SmartFake
+class _FakeGoogleSignInClientAuthorization_0 extends _i1.SmartFake
     implements _i2.GoogleSignInClientAuthorization {
-  _FakeGoogleSignInClientAuthorization_2(
+  _FakeGoogleSignInClientAuthorization_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(parent, parentInvocation);
 }
 
-class _FakeGoogleSignInAuthentication_3 extends _i1.SmartFake
+class _FakeGoogleSignInAuthentication_1 extends _i1.SmartFake
     implements _i2.GoogleSignInAuthentication {
-  _FakeGoogleSignInAuthentication_3(Object parent, Invocation parentInvocation)
+  _FakeGoogleSignInAuthentication_1(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGoogleSignInAuthorizationClient_4 extends _i1.SmartFake
+class _FakeGoogleSignInAuthorizationClient_2 extends _i1.SmartFake
     implements _i2.GoogleSignInAuthorizationClient {
-  _FakeGoogleSignInAuthorizationClient_4(
+  _FakeGoogleSignInAuthorizationClient_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(parent, parentInvocation);
@@ -63,79 +52,66 @@ class _FakeGoogleSignInAuthorizationClient_4 extends _i1.SmartFake
 /// A class which mocks [SignInService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInService extends _i1.Mock implements _i4.SignInService {
+class MockSignInService extends _i1.Mock implements _i3.SignInService {
   @override
-  _i2.GoogleSignIn get googleSignInInstance => (super.noSuchMethod(
-    Invocation.getter(#googleSignInInstance),
-    returnValue: _FakeGoogleSignIn_0(
-      this,
-      Invocation.getter(#googleSignInInstance),
-    ),
-    returnValueForMissingStub: _FakeGoogleSignIn_0(
-      this,
-      Invocation.getter(#googleSignInInstance),
-    ),
-  ) as _i2.GoogleSignIn);
-
-  @override
-  _i3.DotEnv get env => (super.noSuchMethod(
-    Invocation.getter(#env),
-    returnValue: _FakeDotEnv_1(this, Invocation.getter(#env)),
-    returnValueForMissingStub: _FakeDotEnv_1(this, Invocation.getter(#env)),
-  ) as _i3.DotEnv);
-
-  @override
-  _i5.Future<_i2.GoogleSignInAccount?> attemptLogin() => (super.noSuchMethod(
+  _i4.Future<_i2.GoogleSignInAccount?> attemptLogin() => (super.noSuchMethod(
     Invocation.method(#attemptLogin, []),
-    returnValue: _i5.Future<_i2.GoogleSignInAccount?>.value(),
-    returnValueForMissingStub: _i5.Future<_i2.GoogleSignInAccount?>.value(),
-  ) as _i5.Future<_i2.GoogleSignInAccount?>);
+    returnValue: _i4.Future<_i2.GoogleSignInAccount?>.value(),
+    returnValueForMissingStub: _i4.Future<_i2.GoogleSignInAccount?>.value(),
+  ) as _i4.Future<_i2.GoogleSignInAccount?>);
 
   @override
-  _i5.Future<void> initialize() => (super.noSuchMethod(
+  _i4.Future<void> initialize() => (super.noSuchMethod(
     Invocation.method(#initialize, []),
-    returnValue: _i5.Future<void>.value(),
-    returnValueForMissingStub: _i5.Future<void>.value(),
-  ) as _i5.Future<void>);
+    returnValue: _i4.Future<void>.value(),
+    returnValueForMissingStub: _i4.Future<void>.value(),
+  ) as _i4.Future<void>);
 
   @override
-  _i5.Stream<_i2.GoogleSignInAuthenticationEvent>
+  _i4.Stream<_i2.GoogleSignInAuthenticationEvent>
   watchAuthenticationEventsStream() => (super.noSuchMethod(
     Invocation.method(#watchAuthenticationEventsStream, []),
-    returnValue: _i5.Stream<_i2.GoogleSignInAuthenticationEvent>.empty(),
+    returnValue: _i4.Stream<_i2.GoogleSignInAuthenticationEvent>.empty(),
     returnValueForMissingStub:
-        _i5.Stream<_i2.GoogleSignInAuthenticationEvent>.empty(),
-  ) as _i5.Stream<_i2.GoogleSignInAuthenticationEvent>);
+        _i4.Stream<_i2.GoogleSignInAuthenticationEvent>.empty(),
+  ) as _i4.Stream<_i2.GoogleSignInAuthenticationEvent>);
 
   @override
-  _i5.Future<_i2.GoogleSignInClientAuthorization?> authorizationForScopes({
+  _i4.Future<_i2.GoogleSignInClientAuthorization?> authorizationForScopes({
     required _i2.GoogleSignInAccount? user,
   }) => (super.noSuchMethod(
     Invocation.method(#authorizationForScopes, [], {#user: user}),
-    returnValue: _i5.Future<_i2.GoogleSignInClientAuthorization?>.value(),
+    returnValue: _i4.Future<_i2.GoogleSignInClientAuthorization?>.value(),
     returnValueForMissingStub:
-        _i5.Future<_i2.GoogleSignInClientAuthorization?>.value(),
-  ) as _i5.Future<_i2.GoogleSignInClientAuthorization?>);
+        _i4.Future<_i2.GoogleSignInClientAuthorization?>.value(),
+  ) as _i4.Future<_i2.GoogleSignInClientAuthorization?>);
 
   @override
-  _i5.Future<_i2.GoogleSignInClientAuthorization> authorizeScopes({
+  _i4.Future<_i2.GoogleSignInClientAuthorization> requestAuthorization({
     required _i2.GoogleSignInAccount? user,
   }) => (super.noSuchMethod(
-    Invocation.method(#authorizeScopes, [], {#user: user}),
-    returnValue: _i5.Future<_i2.GoogleSignInClientAuthorization>.value(
-      _FakeGoogleSignInClientAuthorization_2(
+    Invocation.method(#requestAuthorization, [], {#user: user}),
+    returnValue: _i4.Future<_i2.GoogleSignInClientAuthorization>.value(
+      _FakeGoogleSignInClientAuthorization_0(
         this,
-        Invocation.method(#authorizeScopes, [], {#user: user}),
+        Invocation.method(#requestAuthorization, [], {#user: user}),
       ),
     ),
     returnValueForMissingStub:
-        _i5.Future<_i2.GoogleSignInClientAuthorization>.value(
-          _FakeGoogleSignInClientAuthorization_2(
+        _i4.Future<_i2.GoogleSignInClientAuthorization>.value(
+          _FakeGoogleSignInClientAuthorization_0(
             this,
-            Invocation.method(#authorizeScopes, [], {#user: user}),
+            Invocation.method(#requestAuthorization, [], {#user: user}),
           ),
         ),
-  ) as _i5.Future<_i2.GoogleSignInClientAuthorization>);
+  ) as _i4.Future<_i2.GoogleSignInClientAuthorization>);
+
+  @override
+  _i4.Future<void> signOut() => (super.noSuchMethod(
+    Invocation.method(#signOut, []),
+    returnValue: _i4.Future<void>.value(),
+    returnValueForMissingStub: _i4.Future<void>.value(),
+  ) as _i4.Future<void>);
 }
 
 /// A class which mocks [GoogleSignInAccount].
@@ -146,8 +122,8 @@ class MockGoogleSignInAccount extends _i1.Mock
   @override
   String get email => (super.noSuchMethod(
     Invocation.getter(#email),
-    returnValue: _i6.dummyValue<String>(this, Invocation.getter(#email)),
-    returnValueForMissingStub: _i6.dummyValue<String>(
+    returnValue: _i5.dummyValue<String>(this, Invocation.getter(#email)),
+    returnValueForMissingStub: _i5.dummyValue<String>(
       this,
       Invocation.getter(#email),
     ),
@@ -156,8 +132,8 @@ class MockGoogleSignInAccount extends _i1.Mock
   @override
   String get id => (super.noSuchMethod(
     Invocation.getter(#id),
-    returnValue: _i6.dummyValue<String>(this, Invocation.getter(#id)),
-    returnValueForMissingStub: _i6.dummyValue<String>(
+    returnValue: _i5.dummyValue<String>(this, Invocation.getter(#id)),
+    returnValueForMissingStub: _i5.dummyValue<String>(
       this,
       Invocation.getter(#id),
     ),
@@ -166,11 +142,11 @@ class MockGoogleSignInAccount extends _i1.Mock
   @override
   _i2.GoogleSignInAuthentication get authentication => (super.noSuchMethod(
     Invocation.getter(#authentication),
-    returnValue: _FakeGoogleSignInAuthentication_3(
+    returnValue: _FakeGoogleSignInAuthentication_1(
       this,
       Invocation.getter(#authentication),
     ),
-    returnValueForMissingStub: _FakeGoogleSignInAuthentication_3(
+    returnValueForMissingStub: _FakeGoogleSignInAuthentication_1(
       this,
       Invocation.getter(#authentication),
     ),
@@ -180,11 +156,11 @@ class MockGoogleSignInAccount extends _i1.Mock
   _i2.GoogleSignInAuthorizationClient get authorizationClient =>
       (super.noSuchMethod(
         Invocation.getter(#authorizationClient),
-        returnValue: _FakeGoogleSignInAuthorizationClient_4(
+        returnValue: _FakeGoogleSignInAuthorizationClient_2(
           this,
           Invocation.getter(#authorizationClient),
         ),
-        returnValueForMissingStub: _FakeGoogleSignInAuthorizationClient_4(
+        returnValueForMissingStub: _FakeGoogleSignInAuthorizationClient_2(
           this,
           Invocation.getter(#authorizationClient),
         ),
@@ -199,8 +175,8 @@ class MockGoogleSignInClientAuthorization extends _i1.Mock
   @override
   String get accessToken => (super.noSuchMethod(
     Invocation.getter(#accessToken),
-    returnValue: _i6.dummyValue<String>(this, Invocation.getter(#accessToken)),
-    returnValueForMissingStub: _i6.dummyValue<String>(
+    returnValue: _i5.dummyValue<String>(this, Invocation.getter(#accessToken)),
+    returnValueForMissingStub: _i5.dummyValue<String>(
       this,
       Invocation.getter(#accessToken),
     ),

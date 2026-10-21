@@ -5,34 +5,38 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/sheets/v4.dart';
 
 class SignInService {
-  SignInService({required this.googleSignInInstance, required this.env});
+  SignInService({required this._googleSignInInstance, required this._env});
 
-  final GoogleSignIn googleSignInInstance;
-  final DotEnv env;
-  static const List<String> scopes = [SheetsApi.driveFileScope];
+  final GoogleSignIn _googleSignInInstance;
+  final DotEnv _env;
+  static const List<String> _scopes = [SheetsApi.driveFileScope];
 
   Future<GoogleSignInAccount?> attemptLogin() async {
-    return await googleSignInInstance.attemptLightweightAuthentication();
+    return await _googleSignInInstance.attemptLightweightAuthentication();
   }
 
   Future<void> initialize() async {
-    await googleSignInInstance.initialize(clientId: env['CLIENT_ID']);
+    await _googleSignInInstance.initialize(clientId: _env['CLIENT_ID']);
   }
 
   Stream<GoogleSignInAuthenticationEvent>
   watchAuthenticationEventsStream() async* {
-    yield* googleSignInInstance.authenticationEvents;
+    yield* _googleSignInInstance.authenticationEvents;
   }
 
   Future<GoogleSignInClientAuthorization?> authorizationForScopes({
     required GoogleSignInAccount user,
   }) {
-    return user.authorizationClient.authorizationForScopes(scopes);
+    return user.authorizationClient.authorizationForScopes(_scopes);
   }
 
-  Future<GoogleSignInClientAuthorization> authorizeScopes({
+  Future<GoogleSignInClientAuthorization> requestAuthorization({
     required GoogleSignInAccount user,
   }) {
-    return user.authorizationClient.authorizeScopes(scopes);
+    return user.authorizationClient.authorizeScopes(_scopes);
+  }
+
+  Future<void> signOut() async {
+    _googleSignInInstance.disconnect();
   }
 }

@@ -1,5 +1,4 @@
 import 'package:dotenv/dotenv.dart';
-import 'package:googleapis/dataform/v1.dart';
 import 'package:maphi_contas/auth/data/repositories/auth_repository_impl.dart';
 import 'package:maphi_contas/auth/data/services/sign_in_service.dart';
 import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.dart';
