@@ -3,11 +3,9 @@ import 'package:fpdart/fpdart.dart';
 import 'package:maphi_contas/auth/domain/entities/google_auth_state.dart';
 import 'package:maphi_contas/auth/domain/repositories/auth_repository_interface.dart';
 import 'package:maphi_contas/auth/domain/usecases/initialize_google_auth_service_usecase.dart';
-import 'package:maphi_contas/core/data/config/dependency_injection.dart';
 import 'package:maphi_contas/core/domain/failures/app_failure.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 @GenerateNiceMocks([
   MockSpec<AuthRepositoryInterface>(),
@@ -17,9 +15,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'initialize_google_auth_service_usecase_test.mocks.dart';
 
 void main() {
-  final anyRepository = MockAuthRepositoryInterface();
-  final anyGoogleAuthState = MockGoogleAuthState();
-  final anyAppFailure = MockAppFailure();
+  late MockAuthRepositoryInterface anyRepository;
+  late MockGoogleAuthState anyGoogleAuthState;
+  late MockAppFailure anyAppFailure;
+
+  setUp(() {
+    anyRepository = MockAuthRepositoryInterface();
+    anyGoogleAuthState = MockGoogleAuthState();
+    anyAppFailure = MockAppFailure();
+  });
 
   test("Retorna um GoogleAuthState, quando a operação dá certo", () async {
     when(anyRepository.initializeService())

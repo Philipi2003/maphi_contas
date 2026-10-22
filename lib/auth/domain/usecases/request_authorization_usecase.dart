@@ -9,7 +9,7 @@ class RequestAuthorizationUsecase {
   final AuthRepositoryInterface repository;
 
   Future<Either<AppFailure, GoogleAuthState>> call({
-    required GoogleAuthState authState,
+    required GoogleAuthState? authState,
   }) {
     return repository.requestAuthorization(authState: authState);
   }

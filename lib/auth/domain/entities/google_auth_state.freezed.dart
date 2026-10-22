@@ -27,20 +27,20 @@ $GoogleAuthStateCopyWith<GoogleAuthState> get copyWith => _$GoogleAuthStateCopyW
 @override
 bool operator ==(Object other) {
   final _this = this as GoogleAuthState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GoogleAuthState&&(identical(other.currentUser, _this.currentUser) || other.currentUser == _this.currentUser)&&(identical(other.isAuthorized, _this.isAuthorized) || other.isAuthorized == _this.isAuthorized));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GoogleAuthState&&(identical(other.currentUser, _this.currentUser) || other.currentUser == _this.currentUser)&&(identical(other.isAuthorized, _this.isAuthorized) || other.isAuthorized == _this.isAuthorized)&&(identical(other.httpClient, _this.httpClient) || other.httpClient == _this.httpClient));
 }
 
 
 @override
 int get hashCode {
   final _this = this as GoogleAuthState;
-  return Object.hash(runtimeType,_this.currentUser,_this.isAuthorized);
+  return Object.hash(runtimeType,_this.currentUser,_this.isAuthorized,_this.httpClient);
 }
 
 @override
 String toString() {
   final _this = this as GoogleAuthState;
-  return 'GoogleAuthState(currentUser: ${_this.currentUser}, isAuthorized: ${_this.isAuthorized})';
+  return 'GoogleAuthState(currentUser: ${_this.currentUser}, isAuthorized: ${_this.isAuthorized}, httpClient: ${_this.httpClient})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $GoogleAuthStateCopyWith<$Res>  {
   factory $GoogleAuthStateCopyWith(GoogleAuthState value, $Res Function(GoogleAuthState) _then) = _$GoogleAuthStateCopyWithImpl;
 @useResult
 $Res call({
- GoogleSignInAccount? currentUser, bool isAuthorized
+ GoogleSignInAccount? currentUser, bool isAuthorized, AuthClient? httpClient
 });
 
 
@@ -68,11 +68,12 @@ class _$GoogleAuthStateCopyWithImpl<$Res>
 
 /// Create a copy of GoogleAuthState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currentUser = freezed,Object? isAuthorized = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? currentUser = freezed,Object? isAuthorized = null,Object? httpClient = freezed,}) {
   return _then(GoogleAuthState(
 currentUser: freezed == currentUser ? _self.currentUser : currentUser // ignore: cast_nullable_to_non_nullable
 as GoogleSignInAccount?,isAuthorized: null == isAuthorized ? _self.isAuthorized : isAuthorized // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,httpClient: freezed == httpClient ? _self.httpClient : httpClient // ignore: cast_nullable_to_non_nullable
+as AuthClient?,
   ));
 }
 

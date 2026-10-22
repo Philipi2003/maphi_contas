@@ -6,18 +6,18 @@ part 'auth_failure.freezed.dart';
 @freezed
 class InitializeServiceFailure extends AppFailure
     with _$InitializeServiceFailure {
-  InitializeServiceFailure({super.statusCode, super.message});
+  InitializeServiceFailure({super.message});
 }
 
 @freezed
 class RequestAuthorizationFailure extends AppFailure
     with _$RequestAuthorizationFailure {
-  RequestAuthorizationFailure({super.statusCode, super.message});
+  RequestAuthorizationFailure({super.message});
 }
 
 @freezed
 class SignOutFailure extends AppFailure with _$SignOutFailure {
-  SignOutFailure({super.statusCode, super.message});
+  SignOutFailure({super.message});
 }
 
 @freezed
@@ -28,5 +28,5 @@ class GoogleSignInFailure extends AppFailure with _$GoogleSignInFailure {
 @freezed
 class AuthenticationEventFailure extends AppFailure
     with _$AuthenticationEventFailure {
-  AuthenticationEventFailure({super.statusCode, super.message});
+  AuthenticationEventFailure({super.message});
 }

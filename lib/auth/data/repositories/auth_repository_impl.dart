@@ -24,7 +24,6 @@ class GoogleAuthRepositoryImpl implements AuthRepositoryInterface {
     } on Exception catch (e) {
       yield Left(
         InitializeServiceFailure(
-          statusCode: '500',
           message: e.toString().replaceFirst("Exception: ", ""),
         ),
       );
@@ -42,23 +41,31 @@ class GoogleAuthRepositoryImpl implements AuthRepositoryInterface {
         };
 
         if (user == null) {
-          return Right(GoogleAuthState(currentUser: null, isAuthorized: false));
+          return Right(
+            GoogleAuthState(
+              currentUser: null,
+              isAuthorized: false,
+              httpClient: null,
+            ),
+          );
         }
 
         final GoogleSignInClientAuthorization? authorization =
             await _signInService.authorizationForScopes(user: user);
 
+        final authenticatedClient = _signInService.getAuthClient(authorization);
+
         return Right(
           GoogleAuthState(
             currentUser: user,
             isAuthorized: authorization != null,
+            httpClient: authenticatedClient,
           ),
         );
       } on Exception catch (e) {
         return Left(
           AuthenticationEventFailure(
             message: e.toString().replaceFirst("Exception: ", ""),
-            statusCode: "500",
           ),
         );
       }
@@ -85,18 +92,28 @@ class GoogleAuthRepositoryImpl implements AuthRepositoryInterface {
 
   @override
   Future<Either<AppFailure, GoogleAuthState>> requestAuthorization({
-    required GoogleAuthState authState,
+    required GoogleAuthState? authState,
   }) async {
     try {
-      // final GoogleSignInClientAuthorization authorization = await _signInService.requestAuthorization(user: authState.currentUser!);
-      await _signInService.requestAuthorization(user: authState.currentUser!);
+      if (authState == null) {
+        Left(RequestAuthorizationFailure(message: "AuthState é nulo"));
+      }
+
+      final authorization = await _signInService.requestAuthorization(
+        user: authState!.currentUser!,
+      );
+
+      final authClient = _signInService.getAuthClient(authorization);
       return Right(
-        GoogleAuthState(currentUser: authState.currentUser, isAuthorized: true),
+        GoogleAuthState(
+          currentUser: authState.currentUser,
+          isAuthorized: true,
+          httpClient: authClient,
+        ),
       );
     } on Exception catch (e) {
       return Left(
         RequestAuthorizationFailure(
-          statusCode: '500',
           message: e.toString().replaceFirst("Exception: ", ""),
         ),
       );
@@ -110,10 +127,7 @@ class GoogleAuthRepositoryImpl implements AuthRepositoryInterface {
       return Right(null);
     } on Exception catch (e) {
       return Left(
-        SignOutFailure(
-          statusCode: "500",
-          message: e.toString().replaceAll("Exception: ", ""),
-        ),
+        SignOutFailure(message: e.toString().replaceAll("Exception: ", "")),
       );
     }
   }

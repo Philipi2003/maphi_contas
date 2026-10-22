@@ -50,19 +50,15 @@ final class HelloWorldProvider
 
 String _$helloWorldHash() => r'b7550791faf7884e172d213f6c03f55d7302458d';
 
-@ProviderFor(currentAuthState)
+@ProviderFor(CurrentAuthState)
 final currentAuthStateProvider = CurrentAuthStateProvider._();
 
 final class CurrentAuthStateProvider
     extends
-        $FunctionalProvider<
-          AsyncValue<Either<AppFailure, GoogleAuthState>>,
-          Either<AppFailure, GoogleAuthState>,
-          Stream<Either<AppFailure, GoogleAuthState>>
-        >
-    with
-        $FutureModifier<Either<AppFailure, GoogleAuthState>>,
-        $StreamProvider<Either<AppFailure, GoogleAuthState>> {
+        $NotifierProvider<
+          CurrentAuthState,
+          Either<AppFailure, GoogleAuthState>
+        > {
   CurrentAuthStateProvider._()
     : super(
         from: null,
@@ -79,17 +75,47 @@ final class CurrentAuthStateProvider
 
   @$internal
   @override
-  $StreamProviderElement<Either<AppFailure, GoogleAuthState>> $createElement(
-    $ProviderPointer pointer,
-  ) => $StreamProviderElement(pointer);
+  CurrentAuthState create() => CurrentAuthState();
 
-  @override
-  Stream<Either<AppFailure, GoogleAuthState>> create(Ref ref) {
-    return currentAuthState(ref);
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Either<AppFailure, GoogleAuthState> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Either<AppFailure, GoogleAuthState>>(
+        value,
+      ),
+    );
   }
 }
 
-String _$currentAuthStateHash() => r'7638f56354cc2423244e20333f7ec9d5e37241e1';
+String _$currentAuthStateHash() => r'fe0dd108aca3b87f8bec11c35fd4d7ded298e79b';
+
+abstract class _$CurrentAuthState
+    extends $Notifier<Either<AppFailure, GoogleAuthState>> {
+  Either<AppFailure, GoogleAuthState> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref =
+        this.ref
+            as $Ref<
+              Either<AppFailure, GoogleAuthState>,
+              Either<AppFailure, GoogleAuthState>
+            >;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<
+                Either<AppFailure, GoogleAuthState>,
+                Either<AppFailure, GoogleAuthState>
+              >,
+              Either<AppFailure, GoogleAuthState>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
 
 @ProviderFor(initializeGoogleAuthServiceUsecase)
 final initializeGoogleAuthServiceUsecaseProvider =
@@ -142,6 +168,55 @@ final class InitializeGoogleAuthServiceUsecaseProvider
 
 String _$initializeGoogleAuthServiceUsecaseHash() =>
     r'2ce88cdd7067ac47415a6f3f2b26e27ff5d39b6e';
+
+@ProviderFor(requestAuthorizationUsecase)
+final requestAuthorizationUsecaseProvider =
+    RequestAuthorizationUsecaseProvider._();
+
+final class RequestAuthorizationUsecaseProvider
+    extends
+        $FunctionalProvider<
+          RequestAuthorizationUsecase,
+          RequestAuthorizationUsecase,
+          RequestAuthorizationUsecase
+        >
+    with $Provider<RequestAuthorizationUsecase> {
+  RequestAuthorizationUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'requestAuthorizationUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$requestAuthorizationUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<RequestAuthorizationUsecase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  RequestAuthorizationUsecase create(Ref ref) {
+    return requestAuthorizationUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RequestAuthorizationUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RequestAuthorizationUsecase>(value),
+    );
+  }
+}
+
+String _$requestAuthorizationUsecaseHash() =>
+    r'02b6092d9191930d4ad524f5f800b87e4007d6af';
 
 @ProviderFor(authRepository)
 final authRepositoryProvider = AuthRepositoryProvider._();

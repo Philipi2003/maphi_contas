@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:maphi_contas/core/data/config/routes.dart';
+import 'package:maphi_contas/core/ui/routes/routes.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
