@@ -11,7 +11,6 @@ class AppFailure with _$AppFailure {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "$statusCode: $message";
   }
 }
